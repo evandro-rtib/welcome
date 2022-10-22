@@ -1,11 +1,11 @@
 import React from 'react'
 
-const InputText = ({children,mx,my,px,py,value,name,placeholder,descLabel,required}) => {
+const InputNumber = ({children,mx,my,px,py,value,name,placeholder,descLabel,required}) => {
   return (
     <div>
       <div className={`form-floating ${mx} ${my} ${px} ${py} `}>
         <input  className="form-control"
-                type="text"
+                type="number"
                 id={`${name}`}
                 name={`${name}`}
                 value={`${value}`}
@@ -18,4 +18,4 @@ const InputText = ({children,mx,my,px,py,value,name,placeholder,descLabel,requir
   )
 }
 
-export default InputText
+export default InputNumber
