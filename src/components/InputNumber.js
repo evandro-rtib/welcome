@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputNumber = ({children,mx,my,px,py,value,name,placeholder,descLabel,required}) => {
+const InputNumber = ({children,mx,my,px,py,name,placeholder,descLabel,required}) => {
   return (
     <div>
       <div className={`form-floating ${mx} ${my} ${px} ${py} `}>
@@ -8,7 +8,7 @@ const InputNumber = ({children,mx,my,px,py,value,name,placeholder,descLabel,requ
                 type="number"
                 id={`${name}`}
                 name={`${name}`}
-                value={`${value}`}
+                
                 placeholder={`${placeholder}`}
                 required={`${required}`}
         />

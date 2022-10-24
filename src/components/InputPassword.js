@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputPassword = ({children,value,name,placeholder,descLabel,required}) => {
+const InputPassword = ({children,name,placeholder,descLabel,required}) => {
   return (
     <div>
       <div className="form-floating">
@@ -8,7 +8,6 @@ const InputPassword = ({children,value,name,placeholder,descLabel,required}) => 
                 type="password"
                 id={`${name}`}
                 name={`${name}`}
-                text={`${value}`}
                 placeholder={`${placeholder}`}
                 required={`${required}`}
         />
