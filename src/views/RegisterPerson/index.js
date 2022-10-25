@@ -1,53 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from '../../components/Container'
 import Card from '../../components/Card'
-import Person from '../../components/Person';
+import PersonDetail from '../../components/PersonDetail'
+
+
+const url = "http://localhost:8080"
 
 const RegisterPerson = ({children,config}) => {
-  const [people,setPeople] = useState([{id: 0, name:"Evandro"},{id: 1, name: "Pâmela"}]);
+  const [people,setPeople] = useState(()=>[])
+
   const [name,setName] = useState('');
   const [doc_rg,setDoc_rg] = useState('');
   const [doc_cpf,setDoc_cpf] = useState('');
   const [birthday,setBirthday] = useState('');
   const [email,setEmail] = useState('');
- 
-  function verifyPerson(name)
-  {
-    for(let id in people)
-    {
-      if (people[id].name === name)
-      {
-        return true
-      }
-      return false
+
+  useEffect(() =>{
+    async function fetchData(){
+      let urlPeopleGet = url + "/people"
+       const res = await fetch(urlPeopleGet)
+
+      const data = await res.json()
+
+      setPeople(data)
     }
+    fetchData()
+
+  },[])
+  
+  function handleSubmit (e){
+    e.preventDefault()
+
+    const person = {
+      name,
+      doc_rg,
+      doc_cpf,
+      email,
+    }
+    console.log(person);
+    let personAddUrl=url + "/person" ;
+      async function fetchData(){
+        await fetch(personAddUrl,{
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify(person)
+          })
+      }
+    fetchData()
   }
 
-  function savePerson (e){
-      e.preventDefault()
-      const name =e.target.name.value;
-       if (!verifyPerson(name))
-      
-        
-      console.log(people)
-      
-  }
   return (
       <Container mx={"mx-5"} my={"my-5"} px={"px-5"} py={"pt-5"}>
         <Card title={"Dados dos moradores"} >
           <div className='row my-1'/>
           <div className='container'>
             <div className='row'>
-              <ul>
-                {
-                    people.map((person,i) => (
-                      <Person id={person.id} name={person.name}/>
-                    ))
-                }
-               </ul>
+              <PersonDetail people={people}/>
             </div>
             <div className='row'>
-              <form onSubmit={savePerson}>
+              <form onSubmit={handleSubmit}>
                 <div className='form-row my-1'/>
                 <div className="d-grid gap-2">
                   {

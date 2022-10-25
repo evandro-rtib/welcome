@@ -8,10 +8,10 @@ function App() {
         "tb_person":{
           "active" :true,
           "name": {"active" : true, "required": "yes", "label":"Nome"},
-          "doc_rg": {"active" : false, "required": "yes", "label":"RG"},
-          "doc_cpf": {"active" : false, "required": "yes", "label":"CPF"},
+          "doc_rg": {"active" : true, "required": "yes", "label":"RG"},
+          "doc_cpf": {"active" : true, "required": "yes", "label":"CPF"},
           "birthday": {"active" : false, "required": "yes", "label":"Data Nascimento"},
-          "email": {"active" : false, "required": "yes", "label":"E-mail"},
+          "email": {"active" : true, "required": "yes", "label":"E-mail"},
 
         },
         "tb_unit": {
