@@ -15,12 +15,13 @@ function App() {
 
         },
         "tb_unit": {
+          "active":false,
           "unit": {"active" : true, "required": "yes", "label":"Unidade"},
           "block": {"active" : true, "required": "yes", "label":"Bloco"},
           "square": {"active" : false, "required": "yes", "label":"Quadra"},
           "lot" : {"active" : false, "required": "yes", "label":"Lote"},
           "intercom": {"active" : true, "required": "yes", "label":"Interfone"},
-          "active":true,
+          
         }
     }
     return (

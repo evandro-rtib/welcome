@@ -5,8 +5,17 @@ import PersonDetail from '../../components/PersonDetail'
 
 
 const url = "http://localhost:8080"
-
+const verifyPerson = (people,person)=>{
+    console.log(people);
+  for (let p in people) { 
+    console.log("ESSE E P: ", p, p.name, person, person.name);
+    if(p.name === person.name)
+      return true    
+  }
+  return false
+}
 const RegisterPerson = ({children,config}) => {
+  /* VARIAVEIS */
   const [people,setPeople] = useState(()=>[])
 
   const [name,setName] = useState('');
@@ -15,6 +24,7 @@ const RegisterPerson = ({children,config}) => {
   const [birthday,setBirthday] = useState('');
   const [email,setEmail] = useState('');
 
+  /* RECEBE DADOS */
   useEffect(() =>{
     async function fetchData(){
       let urlPeopleGet = url + "/people"
@@ -28,6 +38,7 @@ const RegisterPerson = ({children,config}) => {
 
   },[])
   
+  /* SALVA NO BANCO */
   function handleSubmit (e){
     e.preventDefault()
 
@@ -37,8 +48,12 @@ const RegisterPerson = ({children,config}) => {
       doc_cpf,
       email,
     }
+
+    
     console.log(person);
-    let personAddUrl=url + "/person" ;
+    if (!verifyPerson(people,person))
+    {
+      let personAddUrl=url + "/person" ;
       async function fetchData(){
         await fetch(personAddUrl,{
           method: "POST",
@@ -46,7 +61,14 @@ const RegisterPerson = ({children,config}) => {
           body: JSON.stringify(person)
           })
       }
-    fetchData()
+      fetchData()
+      setName('');
+      setDoc_cpf('');
+      setDoc_rg('')
+      setEmail('')
+    }
+    else
+      console.log('deu false')
   }
 
   return (
